@@ -20,7 +20,9 @@ GOBBLET_REPRÉSENTATION = {
     2: ["▪", "◆", "●", "■"],
 }
 
-
+class GobbletError(Exception):
+    def __str__(self):
+        return f"GobbletError: {self.args[0]}"
 class Gobblet:
     """
     Gobblet
@@ -53,7 +55,15 @@ class Gobblet:
             GobbletError: Le numéro du joueur doit être un entier.
             GobbletError: Le numéro du joueur doit être 1 ou 2.
         """
-        pass
+        if isinstance(grosseur, int) == False:
+            raise GobbletError('La grosseur doit être un entier')
+        if grosseur not in [0, 1, 2, 3]:
+            raise GobbletError('La grosseur doit être comprise entre 0 et 3')
+        if isinstance(no_joueur, int) == False:
+            raise GobbletError('Le numéro du joueur doit être un entier')
+        if no_joueur not in [1, 2]:
+            raise GobbletError('Le numéro du joueur doit être 1 ou 2')
+        return (grosseur, no_joueur)
 
     def __str__(self):
         """Formater un gobelet.
@@ -61,7 +71,11 @@ class Gobblet:
         Returns:
             str: Représentation du gobelet pour le joueur.
         """
-        pass
+        if self == []:
+            affichage = '   '
+        else:
+            affichage = ' ' + GOBBLET_REPRÉSENTATION[self[0]][self[1]] + ' '
+        return affichage
 
     def __eq__(self, autre):
         """Comparer l'équivalence de deux gobelets.
@@ -72,7 +86,7 @@ class Gobblet:
         Returns:
             bool: si les deux gobelets sont de même taille.
         """
-        pass
+        return (isinstance(autre, Gobblet)) and (self.grosseur == autre.grosseur)
 
     def __gt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -83,7 +97,9 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus gros que l'autre.
         """
-        pass
+        return (isinstance(autre, Gobblet)) and (self.no_joueur < autre.no_joueur)\
+        if self.no_joueur == 1 else (isinstance(autre, Gobblet)) and \
+            (autre.no_joueur < self.no_joueur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -94,7 +110,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit que l'autre.
         """
-        pass
+        return  Gobblet.__eq__(self, autre)
 
     def __ne__(self, autre):
         """Comparer l'équivalence de deux gobelets.
