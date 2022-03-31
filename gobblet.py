@@ -98,7 +98,7 @@ class Gobblet:
             bool: si ce gobelet est plus gros que l'autre.
         """
         return (isinstance(autre, Gobblet)) and (self.no_joueur < autre.no_joueur)\
-        if self.no_joueur == 1 else (isinstance(autre, Gobblet)) and \
+        if self.no_joueur == 1 else (isinstance(autre, Gobblet)) and\
             (autre.no_joueur < self.no_joueur)
 
     def __lt__(self, autre):
@@ -110,7 +110,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit que l'autre.
         """
-        return  Gobblet.__eq__(self, autre)
+        return  not (Gobblet.__eq__(self, autre) and Gobblet.__gt__(self, autre))
 
     def __ne__(self, autre):
         """Comparer l'équivalence de deux gobelets.
@@ -121,7 +121,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet n'est pas équivalent à l'autre.
         """
-        pass
+        return not(Gobblet.__eq__(self, autre))
 
     def __ge__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -132,7 +132,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus grand ou égal à l'autre.
         """
-        pass
+        return not(Gobblet.__gt__(self, autre))
 
     def __le__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -143,7 +143,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit ou égal à l'autre.
         """
-        pass
+        return Gobblet.__eq__(self, autre) and Gobblet.__gt__(self, autre)
 
     def état_gobblet(self):
         """Obtenir l'état du gobelet.
@@ -151,7 +151,7 @@ class Gobblet:
         Returns:
             list: la paire d'entiers représentant l'état du gobelet (numéro du joueur et grosseur du gobelet).
         """
-        pass
+        return [self.no_joueur, self.grosseur]
 
 
 def interpréteur_de_commande():
@@ -162,7 +162,11 @@ def interpréteur_de_commande():
                    Cette objet aura l'attribut IDUL représentant l'idul du joueur
                    et l'attribut lister qui est un booléen True/False.
     """
-    pass
+    parser = ArgumentParser(description='Gobblet')
+    parser.add_argument('IDUL', help='IDUL du joueur')
+    parser.add_argument('-l','--lister', dest='lister',
+                        action='store_true', help='Lister les parties existantes')
+    return parser.parse_args()
 
 
 def formater_jeu(plateau, joueurs):
@@ -175,7 +179,18 @@ def formater_jeu(plateau, joueurs):
     Returns:
         str: Représentation du jeu.
     """
-    pass
+    r = ''
+    len1 = len(joueurs[0]['nom'])
+    len2 = len(joueurs[1]['nom'])
+    espace = max(len1, len2) - min(len1, len2)
+    for i, e in enumerate(joueurs):
+        if i == 0 and len1 < len2:
+            r += ' '*espace  + formater_un_joueur(e) + '\n'
+        elif i == 1 and len2 < len1:
+            r += ' '*espace  + formater_un_joueur(e) + '\n'
+        else:
+            r += formater_un_joueur(e) + '\n'
+    return " "*(max(len1, len2) + 3) + "0   1   2 \n" + r + '\n' + formater_plateau(plateau)
 
 def formater_les_parties(parties):
     """Formater une liste de parties.
@@ -188,4 +203,11 @@ def formater_les_parties(parties):
     Returns:
         str: Représentation des parties.
     """
-    pass
+    représentation = ''
+    for y, i in enumerate(parties):
+        représentation += f'{y} : {i["date"]}, {i["joueurs"][0]} vs {i["joueurs"][1]}'
+        if i["gagnant"] is not None:
+            représentation += f', gagnant: {i["gagnant"]}\n'
+        else:
+            représentation += '\n'
+    return représentation
