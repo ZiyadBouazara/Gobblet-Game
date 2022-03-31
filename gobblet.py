@@ -86,7 +86,7 @@ class Gobblet:
         Returns:
             bool: si les deux gobelets sont de même taille.
         """
-        return (isinstance(autre, Gobblet)) and (self.grosseur == autre.grosseur)
+        return isinstance(autre, Gobblet) and isinstance(self, Gobblet) and (self.grosseur == autre.grosseur)
 
     def __gt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -97,9 +97,12 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus gros que l'autre.
         """
-        return (isinstance(autre, Gobblet)) and (self.no_joueur < autre.no_joueur)\
-        if self.no_joueur == 1 else (isinstance(autre, Gobblet)) and\
-            (autre.no_joueur < self.no_joueur)
+        if self.no_joueur == 1:
+            return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
+            and (self.grosseur < autre.grosseur)
+        else:
+            return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
+            and (autre.grosseur < self.grosseur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -110,7 +113,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit que l'autre.
         """
-        return  not (Gobblet.__eq__(self, autre) and Gobblet.__gt__(self, autre))
+        return  not (Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre))
 
     def __ne__(self, autre):
         """Comparer l'équivalence de deux gobelets.
@@ -121,7 +124,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet n'est pas équivalent à l'autre.
         """
-        return not(Gobblet.__eq__(self, autre))
+        return not Gobblet.__eq__(self, autre)
 
     def __ge__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -132,7 +135,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus grand ou égal à l'autre.
         """
-        return not(Gobblet.__gt__(self, autre))
+        return not Gobblet.__gt__(self, autre)
 
     def __le__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -143,7 +146,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit ou égal à l'autre.
         """
-        return Gobblet.__eq__(self, autre) and Gobblet.__gt__(self, autre)
+        return Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre)
 
     def état_gobblet(self):
         """Obtenir l'état du gobelet.
@@ -159,8 +162,8 @@ def interpréteur_de_commande():
 
     Returns:
         Namespace: Un objet Namespace tel que retourné par parser.parse_args().
-                   Cette objet aura l'attribut IDUL représentant l'idul du joueur
-                   et l'attribut lister qui est un booléen True/False.
+        Cette objet aura l'attribut IDUL représentant l'idul du joueur
+        et l'attribut lister qui est un booléen True/False.
     """
     parser = ArgumentParser(description='Gobblet')
     parser.add_argument('IDUL', help='IDUL du joueur')
@@ -185,12 +188,12 @@ def formater_jeu(plateau, joueurs):
     espace = max(len1, len2) - min(len1, len2)
     for i, e in enumerate(joueurs):
         if i == 0 and len1 < len2:
-            r += ' '*espace  + formater_un_joueur(e) + '\n'
+            r += ' '*espace  + e.__str__() + '\n'
         elif i == 1 and len2 < len1:
-            r += ' '*espace  + formater_un_joueur(e) + '\n'
+            r += ' '*espace  + e.__str__() + '\n'
         else:
-            r += formater_un_joueur(e) + '\n'
-    return " "*(max(len1, len2) + 3) + "0   1   2 \n" + r + '\n' + formater_plateau(plateau)
+            r += e.__str__() + '\n'
+    return " "*(max(len1, len2) + 3) + "0   1   2 \n" + r + '\n' + plateau.__str__()
 
 def formater_les_parties(parties):
     """Formater une liste de parties.
