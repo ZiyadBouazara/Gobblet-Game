@@ -26,7 +26,6 @@ def test_classe_gobblet():
     gobblet_attendu = [1, 2]
 
     gobblet = Gobblet(gobblet_attendu[1], gobblet_attendu[0])
-
     état_gobblet = gobblet.état_gobblet()
 
     assert état_gobblet == gobblet_attendu, "Échec du test de la classe Gobblet"
@@ -76,13 +75,25 @@ def test_formater_un_jeu():
 
     assert résultat == attendu, f"Échec du test de formater_jeu"
 
-
+'''
 if __name__ == "__main__":
-    test_classe_joueur()
-    print("Test d'initialisation de la classe Joueur réussi")
+    #test_classe_joueur()
+    #print("Test d'initialisation de la classe Joueur réussi")
     test_classe_gobblet()
     print("Test d'initialisation de la classe Gobblet réussi")
     test_classe_plateau()
     print("Test d'initialisation de la classe Plateau réussi")
     test_formater_un_jeu()
     print("Test de formater_un_jeu réussi")
+'''
+
+'''
+Test pour les surcharges 
+gobblet = Gobblet(3, 1)
+x = Gobblet(1, 2)
+print(x.__le__(gobblet))
+
+y = Gobblet(3, 1)
+z = Gobblet(1, 2)
+print(z.état_gobblet())
+'''

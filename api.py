@@ -31,7 +31,15 @@ def lister_parties(idul, secret):
         list: Liste des parties reçues du serveur,
              après avoir décodé le json de sa réponse.
     """
-    pass
+    rep = requests.get(URL+'parties', auth=(idul, secret))
+    dicti = rep.json()
+    if rep.status_code == 401:
+        raise PermissionError(dicti['message'])
+    if rep.status_code == 406:
+        raise RuntimeError(dicti['message'])
+    if rep.status_code not in (200, 401, 406):
+        raise ConnectionError
+    return dicti['parties']
 
 
 def débuter_partie(idul, secret):
@@ -72,7 +80,15 @@ def récupérer_partie(id_partie, idul, secret):
             de l'état du plateau de jeu et de la liste des joueurs,
             après avoir décodé le JSON de sa réponse.
     """
-    pass
+    rep = requests.post(URL+'partie', auth=(idul, secret))
+    dicti = rep.json()
+    if rep.status_code == 401:
+        raise PermissionError(dicti['message'])
+    if rep.status_code == 406:
+        raise RuntimeError(dicti['message'])
+    if rep.status_code not in (200, 401, 406):
+        raise ConnectionError
+    return (dicti['id'], dicti['plateau'], dicti['joueurs'])
 
 
 def jouer_coup(id_partie, origine, destination, idul, secret):
@@ -99,4 +115,22 @@ def jouer_coup(id_partie, origine, destination, idul, secret):
             de l'état du plateau de jeu et de la liste des joueurs,
             après avoir décodé le JSON de sa réponse.
     """
-    pass
+    rep = requests.put(
+        URL+'jouer',
+        auth=(idul, secret),
+        json={
+            "id": id_partie,
+            "destination": destination,
+            "origine": origine,
+        }
+    )
+    dicti = rep.json()
+    if rep.status_code == 401:
+        raise PermissionError(dicti['message'])
+    if rep.status_code == 406:
+        raise RuntimeError(dicti['message'])
+    if rep.status_code not in (200, 401, 406):
+        raise ConnectionError
+    if dicti['gagnant'] is not None:
+        raise StopIteration(dicti['gagnant'])
+    return (dicti['id'], dicti['plateau'], dicti['joueurs'])
