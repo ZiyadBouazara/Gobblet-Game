@@ -20,9 +20,12 @@ GOBBLET_REPRÉSENTATION = {
     2: ["▪", "◆", "●", "■"],
 }
 
+
 class GobbletError(Exception):
     def __str__(self):
         return f"GobbletError: {self.args[0]}"
+
+
 class Gobblet:
     """
     Gobblet
@@ -37,7 +40,8 @@ class Gobblet:
             grosseur (int): Grosseur du Gobblet [0, 1, 2, 3].
             no_joueur (int): Numéro du joueur [1, 2].
         """
-        self.grosseur, self.no_joueur = self.valider_gobblet(grosseur, no_joueur)
+        self.grosseur, self.no_joueur = self.valider_gobblet(
+            grosseur, no_joueur)
 
     def valider_gobblet(self, grosseur, no_joueur):
         """Validateur de gobelet.
@@ -99,10 +103,10 @@ class Gobblet:
         """
         if self.no_joueur == 1:
             return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-            and (self.grosseur < autre.grosseur)
+                and (self.grosseur < autre.grosseur)
         else:
             return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-            and (autre.grosseur < self.grosseur)
+                and (autre.grosseur < self.grosseur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -113,7 +117,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit que l'autre.
         """
-        return  not (Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre))
+        return not (Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre))
 
     def __ne__(self, autre):
         """Comparer l'équivalence de deux gobelets.
@@ -167,7 +171,7 @@ def interpréteur_de_commande():
     """
     parser = ArgumentParser(description='Gobblet')
     parser.add_argument('IDUL', help='IDUL du joueur')
-    parser.add_argument('-l','--lister', dest='lister',
+    parser.add_argument('-l', '--lister',
                         action='store_true', help='Lister les parties existantes')
     return parser.parse_args()
 
@@ -188,12 +192,13 @@ def formater_jeu(plateau, joueurs):
     espace = max(len1, len2) - min(len1, len2)
     for i, e in enumerate(joueurs):
         if i == 0 and len1 < len2:
-            r += ' '*espace  + e.__str__() + '\n'
+            r += ' '*espace + e.__str__() + '\n'
         elif i == 1 and len2 < len1:
-            r += ' '*espace  + e.__str__() + '\n'
+            r += ' '*espace + e.__str__() + '\n'
         else:
             r += e.__str__() + '\n'
     return " "*(max(len1, len2) + 3) + "0   1   2 \n" + r + '\n' + plateau.__str__()
+
 
 def formater_les_parties(parties):
     """Formater une liste de parties.

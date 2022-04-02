@@ -24,7 +24,8 @@ class Joueur:
                              par exemple [[1, 1], [], [1, 2]], où la paire [1, 2] 
                              représente le numéro du joueur (1) et la grosseur du gobelet (2).
         """
-        self.nom, self.no_joueur, self.piles = self.valider_joueur(nom, no_joueur, gobelets)
+        self.nom, self.no_joueur, self.piles = self.valider_joueur(
+            nom, no_joueur, gobelets)
 
     def valider_joueur(self, nom, no_joueur, gobelets):
         """Validateur de Joueur.
@@ -49,7 +50,31 @@ class Joueur:
             GobbletError: Le joueur doit possèder 3 piles.
             GobbletError: Une pile doit être une liste de deux entiers ou une liste vide.
         """
-        pass
+        if len(nom) <= 0:  # Les Raises d'erreurs
+            raise GobbletError(
+                "Le nom du joueur doit être une chaine de caractères non vide.")
+        if no_joueur not in [1, 2]:
+            raise GobbletError("Le numéro du joueur doit être 1 ou 2")
+        for pile in gobelets:
+            if isinstance(pile, list) == False:
+                raise GobbletError(
+                    "Les piles de gobelets doivent être spécifiés sous la forme d'une liste.")
+            for i in pile:  # 5ieme Erreur
+                if isinstance(i, int) == False or len(pile) != 2:
+                    if pile != []:
+                        raise GobbletError(
+                            "Une pile doit être une liste de deux entiers ou une liste vide.")
+        if len(gobelets) != 3:
+            raise GobbletError("Le joueur doit possèder 3 piles.")
+
+        new = []  # Remplacer une liste vide par None dans gobelets
+        for z in gobelets:
+            if z == []:
+                new.append(None)
+            else:
+                new.append(z)
+
+        return (nom, no_joueur, new)
 
     def __str__(self):
         """Formater un joueur.
@@ -57,7 +82,17 @@ class Joueur:
         Returns:
             str: Représentation du joueur et de ses piles de gobelets.
         """
-        pass
+        temporary = f"{self.nom}: "
+        x = 0
+        for i in self.piles:
+            if 0 < x < 3:
+                temporary += " "
+            x += 1
+            if i is None:
+                temporary += "   "
+            else:
+                temporary += i.__str__()
+        return temporary
 
     def retirer_gobblet(self, no_pile):
         """Retirer un gobelet de la pile.
@@ -73,7 +108,14 @@ class Joueur:
             GobbletError: Le numéro de la pile doit être 0, 1 ou 2.
             GobbletError: Le joueur ne possède pas de gobelet pour la pile demandée.
         """
-        pass
+        if isinstance(no_pile, int) == False:
+            raise GobbletError("Le numéro de la pile doit être un entier.")
+        if no_pile not in [0, 1, 2]:
+            raise GobbletError("Le numéro de la pile doit être 0, 1 ou 2.")
+        if self.piles[no_pile] is None:
+            raise GobbletError(
+                "Le joueur ne possède pas de gobelet pour la pile demandée.")
+        return self.piles[no_pile]
 
     def placer_gobblet(self, no_pile, gobelets):
         """Placer un gobelet dans la pile.
@@ -93,7 +135,17 @@ class Joueur:
             GobbletError: Le gobelet doit appartenir au joueur.
             GobbletError: Vous ne pouvez pas placer un gobelet à cet emplacement.
         """
-        pass
+        if isinstance(no_pile, int) == False:
+            raise GobbletError("Le numéro de la pile doit être un entier.")
+        if no_pile not in [0, 1, 2]:
+            raise GobbletError("Le numéro de la pile doit être 0, 1 ou 2.")
+        if len(gobelets) != 2:
+            raise GobbletError(
+                "GobbletError: Le gobelet doit appartenir au joueur.")
+        if self.piles[no_pile] is not None:
+            raise GobbletError(
+                "GobbletError: Vous ne pouvez pas placer un gobelet à cet emplacement.")
+        self.piles[no_pile] = gobelets
 
     def récupérer_le_coup(self, plateau):
         """Récupérer le coup
@@ -127,7 +179,26 @@ class Joueur:
             Donnez le numéro de la pile (p) ou la position sur le plateau (x,y): 2,3
             Où voulez-vous placer votre gobelet (x,y): 0,1
         """
-        pass
+        coup = input('Quel gobelet voulez-vous déplacer:')
+        origin = input(
+            'Donnez le numéro de la pile (p) ou la position sur le plateau (x,y):')
+        destination = input('Où voulez-vous placer votre gobelet (x,y):')
+        if len(origin) != 1:
+            origin = [int(origin[0]), int(origin[2])]
+            for i in origin:
+                if isinstance(i, int) == False:
+                    raise GobbletError(
+                        "L'origine doit être un entier ou une liste de 2 entiers.")
+
+        else:
+            origin = int(origin)
+
+        for i in origin:
+            if isinstance(i, int) == False:
+                raise GobbletError(
+                    "L'origine doit être un entier ou une liste de 2 entiers.")
+
+        return (origin, [int(destination[0]), int(destination[2])])
 
     def état_joueur(self):
         """Obtenir l'état du joueur
@@ -136,3 +207,7 @@ class Joueur:
             dict: Dictionnaire contenant l'état du joueur tel que représenté dans l'énoncé
         """
         pass
+
+
+T = Joueur('Ziyad', 1, [[1, 2], [1, 3], []])
+print(T)
