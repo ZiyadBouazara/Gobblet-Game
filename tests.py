@@ -14,7 +14,8 @@ def test_classe_joueur():
         "piles": [[1, 3], [1, 3], [1, 3]],
     }
 
-    joueur = Joueur(état_joueur_attendu["nom"], 1, état_joueur_attendu["piles"])
+    joueur = Joueur(état_joueur_attendu["nom"],
+                    1, état_joueur_attendu["piles"])
 
     état_joueur = joueur.état_joueur()
 
@@ -46,6 +47,7 @@ def test_classe_plateau():
 
     assert état_plateau == plateau_attendu, "Échec du test de la classe Plateau"
 
+
 def test_formater_un_jeu():
     """Test de la fonction formater_jeu"""
     plateau = Plateau([
@@ -75,10 +77,11 @@ def test_formater_un_jeu():
 
     assert résultat == attendu, f"Échec du test de formater_jeu"
 
+
 '''
 if __name__ == "__main__":
-    #test_classe_joueur()
-    #print("Test d'initialisation de la classe Joueur réussi")
+    test_classe_joueur()
+    print("Test d'initialisation de la classe Joueur réussi")
     test_classe_gobblet()
     print("Test d'initialisation de la classe Gobblet réussi")
     test_classe_plateau()
@@ -86,6 +89,7 @@ if __name__ == "__main__":
     test_formater_un_jeu()
     print("Test de formater_un_jeu réussi")
 '''
+
 
 '''
 Test pour les surcharges 

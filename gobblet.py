@@ -78,7 +78,8 @@ class Gobblet:
         if self == []:
             affichage = '   '
         else:
-            affichage = ' ' + GOBBLET_REPRÉSENTATION[self[0]][self[1]] + ' '
+            affichage = ' ' + \
+                GOBBLET_REPRÉSENTATION[self.no_joueur][self.grosseur] + ' '
         return affichage
 
     def __eq__(self, autre):

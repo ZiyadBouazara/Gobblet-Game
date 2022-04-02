@@ -72,8 +72,7 @@ class Joueur:
             if z == []:
                 new.append(None)
             else:
-                new.append(z)
-
+                new.append(Gobblet(z[1], z[0]))
         return (nom, no_joueur, new)
 
     def __str__(self):
@@ -183,22 +182,27 @@ class Joueur:
         origin = input(
             'Donnez le numéro de la pile (p) ou la position sur le plateau (x,y):')
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
+
         if len(origin) != 1:
             origin = [int(origin[0]), int(origin[2])]
             for i in origin:
                 if isinstance(i, int) == False:
                     raise GobbletError(
                         "L'origine doit être un entier ou une liste de 2 entiers.")
-
+                if i not in [0, 1, 2, 3]:
+                    raise GobbletError(
+                        "L'origine n'est pas une case valide du plateau.")
         else:
-            origin = int(origin)
-
-        for i in origin:
-            if isinstance(i, int) == False:
+            if origin.isdigit() == False:
                 raise GobbletError(
                     "L'origine doit être un entier ou une liste de 2 entiers.")
+            origin = int(origin)
+            if origin not in [0, 1, 2]:
+                raise GobbletError("L'origine n'est pas une pile valide.")
 
-        return (origin, [int(destination[0]), int(destination[2])])
+        destination = [int(destination[0]), int(destination[2])]
+
+        return (origin, destination)
 
     def état_joueur(self):
         """Obtenir l'état du joueur
@@ -206,8 +210,7 @@ class Joueur:
         Returns:
             dict: Dictionnaire contenant l'état du joueur tel que représenté dans l'énoncé
         """
-        pass
+        return {"nom": self.nom, "piles": self.piles}
 
-
-T = Joueur('Ziyad', 1, [[1, 2], [1, 3], []])
-print(T)
+# T = Joueur('Ziyad', 2, [[1, 2], [2, 1], []])
+# print(T.état_joueur())
