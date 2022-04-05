@@ -202,7 +202,7 @@ class Joueur:
                 raise("L'origine ne possède pas de gobelet")
             if isinstance(plateau[destination[0]][destination[1]], Gobblet) and \
             plateau[destination[0]][destination[1]].grosseur >= \
-            self.piles[origin][origin].grosseur:
+            self.piles[origin].grosseur:
                 raise GobbletError("La destination n'est pas une case valide du plateau")
         
         if len(destination) != 2 or isinstance(destination[0], int) == False \
