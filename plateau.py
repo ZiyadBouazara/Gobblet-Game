@@ -37,19 +37,21 @@ class Plateau:
             GobbletError: Le plateau ne possède pas le bon nombre de colonne dans les lignes
             GobbletError: Les Gobblets doivent être des listes de paires ou une liste vide
         """
-        # INCOMPLET
+        # OK
         if type(plateau) != list:
             raise GobbletError('Le plateau doit être une liste')
         if len(plateau) != 4:
             raise GobbletError('Le plateau ne possède pas le bon nombre de ligne')
-        for i in range(5):
-            if len(plateau[i]) != 4:
+        for i in plateau:
+            if len(i) != 4:
                 raise GobbletError('Le plateau ne possède pas le bon nombre de colonne dans les lignes')
-            for n in range(3):
-                if len(plateau[i][n]) != [] or len(plateau[i][n]) != 2:
+            for n in range(4):
+                if i[n] != [] and len(i[n]) != 2:
                     raise GobbletError('Les Gobblets doivent être des listes de paires ou une liste vide')
-                if len(plateau[i][n]) == []: #À MODIFIER
-                    return None
+                elif i[n] == []: 
+                    i[n] = None
+                elif len(i[n]) == 2:
+                    i[n] = Gobblet(i[n][1], i[n][0])
         return (plateau)
 
     def __str__(self):
@@ -136,3 +138,6 @@ class Plateau:
             list: Liste contenant l'état du plateau tel que représenté dans l'énoncé
         """
         return [self.plateau]
+
+# A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
+# print(A.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]]))
