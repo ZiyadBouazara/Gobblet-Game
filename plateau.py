@@ -53,7 +53,7 @@ class Plateau:
                 elif len(i[n]) == 2:
                     i[n] = Gobblet(i[n][1], i[n][0])
         return (plateau)
-
+    
     def __str__(self):
         """Formater un plateau
 
@@ -70,7 +70,7 @@ class Plateau:
             else:
                 plateau_formaté += "  0   1   2   3 "
         return plateau_formaté
-
+    
     def retirer_gobblet(self, no_colonne, no_ligne):
         """Retirer un Gobblet du plateau
 
@@ -139,5 +139,5 @@ class Plateau:
         """
         return [self.plateau]
 
-A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
-print(A)
+#A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
+#print(A)

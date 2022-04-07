@@ -72,7 +72,7 @@ class Joueur:
             if z == []:
                 new.append(None)
             else:
-                new.append(Gobblet(z[1], z[0]))
+                new.append(Gobblet(z[1], z[0]).état_gobblet())
         return (nom, no_joueur, new)
 
     def __str__(self):
@@ -228,5 +228,5 @@ class Joueur:
         """
         return {"nom": self.nom, "piles": self.piles}
 
-# T = Joueur('Ziyad', 2, [[1, 2], [2, 1], []])
-# print(T.état_joueur())
+#T = Joueur('Ziyad', 2, [[1, 2], [2, 1], []])
+#print(T.état_joueur())
