@@ -20,8 +20,8 @@ class Joueur:
         Args:
             nom (str): le nom du joueur.
             no_joueur (int): le numéro du joueur (1 ou 2).
-            gobelets (list): une liste des trois gobelets disponibles pour ce joueur, 
-            par exemple [[1, 1], [], [1, 2]], où la paire [1, 2] 
+            gobelets (list): une liste des trois gobelets disponibles pour ce joueur,
+            par exemple [[1, 1], [], [1, 2]], où la paire [1, 2]
             représente le numéro du joueur (1) et la grosseur du gobelet (2).
         """
         self.nom, self.no_joueur, self.piles = self.valider_joueur(
@@ -33,8 +33,8 @@ class Joueur:
         Args:
             nom (str): le nom du joueur.
             no_joueur (int): le numéro du joueur (1 ou 2).
-            gobelets (list): une liste des trois gobelets disponibles pour ce joueur, 
-                             par exemple [[1, 1], [], [1, 2]], où la paire [1, 2] 
+            gobelets (list): une liste des trois gobelets disponibles pour ce joueur,
+                             par exemple [[1, 1], [], [1, 2]], où la paire [1, 2]
                              représente le numéro du joueur (1) et la grosseur du gobelet (2).
 
         Returns:
@@ -119,7 +119,7 @@ class Joueur:
     def placer_gobblet(self, no_pile, gobelets):
         """Placer un gobelet dans la pile.
 
-        Notez que les règles du jeu ne permettent pas de placer un gobelet dans une pile, 
+        Notez que les règles du jeu ne permettent pas de placer un gobelet dans une pile,
         sauf au début de la partie pour l'initialiser.
 
         L'emplacement de la pile doit donc être libre (valeur `None`).
@@ -226,7 +226,13 @@ class Joueur:
         Returns:
             dict: Dictionnaire contenant l'état du joueur tel que représenté dans l'énoncé
         """
-        return {"nom": self.nom, "piles": self.piles}
+        liste = []
+        for i in self.piles:
+            if i == None:
+                liste.append([])
+            else:
+                liste.append(i.état_gobblet())
+        return {"nom": self.nom, "piles": liste}
 
 
 # T = Joueur('Ziyad', 2, [[1, 2], [2, 1], []])
