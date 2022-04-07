@@ -88,12 +88,12 @@ class Plateau:
             GobbletError: Le plateau ne possède pas de Gobblet pour la case demandée
         """
         # J'accède à l'information pour formater le gobblet
-        gobblet_retiré =  self[no_ligne][no_colonne]
+        gobblet_retiré =  self.plateau[no_ligne][no_colonne]
         # Comment je retourne la version formatée du gobblet? Pas certaine de ce que j'ai fait.
         gobblet_formaté = gobblet_retiré.__str__()
         
-        # Errors
-        if type(no_colonne) != list or type(no_ligne) != list:
+        # Errors MOdifier erreur 1
+        if type(no_colonne[i]) != list or type(no_ligne) != list:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -119,9 +119,9 @@ class Plateau:
             GobbletError: Le Gobblet ne peut pas être placé sur la case demandée
         """
         # Incomplet! Comment coder ce qui est demandé?
-        self.plateau[no_ligne][no_colonne] == gobblet
+        self.plateau[no_ligne][no_colonne] 
 
-        # J'ai seulement fait les Errors
+        # J'ai seulement fait les Errors ERREUR 1
         if type(no_colonne) != list or type(no_ligne) != list:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
@@ -129,8 +129,8 @@ class Plateau:
         if no_colonne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la colonne doit être 0, 1, 2 ou 3')
         if self.plateau[no_ligne][no_colonne] is not None and self.plateau[no_ligne][no_colonne][0] >= gobblet[0]:
-            raise GobbletError('Le Gobblet ne peut pas être placé sur la case demandée')
-
+            raise GobbletError('Le Gobblet ne peut pas être placé sur la case demandée') #double check
+    # OK
     def état_plateau(self):
         """Obtenir l'état du plateau
 
@@ -139,5 +139,5 @@ class Plateau:
         """
         return [self.plateau]
 
-# A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
-# print(A.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]]))
+A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
+print(A)
