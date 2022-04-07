@@ -60,16 +60,16 @@ class Plateau:
         Returns:
             str: Représentation du plateau avec ses Gobblet
         """
-        plateau = ""
-        for i in range(4):
+        plateau_formaté = ""
+        for i in self.plateau:
             #On établie et formate les 4 gobblets respectifs a chaque ligne
-            gobblet = [(self[i][0]).__str__(), (self[i][1]).__str__(), (self[i][2]).__str__(), (self[i][3]).__str__()]
-            plateau += f"{3-i}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n"
+            gobblet = [(i[0]).__str__(), (i[1]).__str__(), (i[2]).__str__(), (i[3]).__str__()]
+            plateau_formaté += f"{3-i}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n"
             if 3-i != 0:
-                plateau += " ───┼───┼───┼───\n"
+                plateau_formaté += " ───┼───┼───┼───\n"
             else:
-                plateau += "  0   1   2   3 "
-        return plateau
+                plateau_formaté += "  0   1   2   3 "
+        return plateau_formaté
 
     def retirer_gobblet(self, no_colonne, no_ligne):
         """Retirer un Gobblet du plateau
