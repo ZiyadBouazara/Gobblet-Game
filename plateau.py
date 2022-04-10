@@ -21,7 +21,7 @@ class Plateau:
             plateau (list): Plateau à construire tel que représenté dans l'énoncé
         """
         self.plateau = self.valider_plateau(plateau)
-
+    # OK TESTÉ
     def valider_plateau(self, plateau):
         """Validateur de Plateau
 
@@ -53,7 +53,7 @@ class Plateau:
                 elif len(i[n]) == 2:
                     i[n] = Gobblet(i[n][1], i[n][0])
         return (plateau)
-    
+    # OK TESTÉ
     def __str__(self):
         """Formater un plateau
 
@@ -62,13 +62,18 @@ class Plateau:
         """
         plateau_formaté = ""
         for i in self.plateau:
+            for n in range(4):
+                if i[n] == None:
+                    i[n] = '   '
+        for i in range(4):
             #On établie et formate les 4 gobblets respectifs a chaque ligne
-            gobblet = [(i[0]).__str__(), (i[1]).__str__(), (i[2]).__str__(), (i[3]).__str__()]
+            gobblet = [(self.plateau[i][0]).__str__(), (self.plateau[i][1]).__str__(), (self.plateau[i][2]).__str__(), (self.plateau[i][3]).__str__()]
             plateau_formaté += f"{3-i}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n"
             if 3-i != 0:
                 plateau_formaté += " ───┼───┼───┼───\n"
             else:
                 plateau_formaté += "  0   1   2   3 "
+    
         return plateau_formaté
     
     def retirer_gobblet(self, no_colonne, no_ligne):
@@ -89,11 +94,11 @@ class Plateau:
         """
         # J'accède à l'information pour formater le gobblet
         gobblet_retiré =  self.plateau[no_ligne][no_colonne]
-        # Comment je retourne la version formatée du gobblet? Pas certaine de ce que j'ai fait.
+        # Je retourne la version formatée du gobblet
         gobblet_formaté = gobblet_retiré.__str__()
         
-        # Errors MOdifier erreur 1
-        if type(no_colonne[i]) != list or type(no_ligne) != list:
+        # Errors MOdifier erreur 1 OKAY MODIFIER
+        if type(no_colonne) != int or type(no_ligne) != int:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -118,11 +123,9 @@ class Plateau:
             GobbletError: Le numéro de la colonne doit être 0, 1, 2 ou 3
             GobbletError: Le Gobblet ne peut pas être placé sur la case demandée
         """
-        # Incomplet! Comment coder ce qui est demandé?
-        self.plateau[no_ligne][no_colonne] 
 
-        # J'ai seulement fait les Errors ERREUR 1
-        if type(no_colonne) != list or type(no_ligne) != list:
+        # OK
+        if type(no_colonne) != int or type(no_ligne) != int:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -139,5 +142,10 @@ class Plateau:
         """
         return [self.plateau]
 
-#A = Plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[1, 3], [], [], []]])
-#print(A)
+
+#Tests
+#plateau_attendu = [[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]
+#plateau = Plateau(plateau_attendu)
+
+#print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
+#print(plateau.valider_plateau())
