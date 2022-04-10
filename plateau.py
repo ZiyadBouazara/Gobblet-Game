@@ -140,12 +140,17 @@ class Plateau:
         Returns:
             list: Liste contenant l'état du plateau tel que représenté dans l'énoncé
         """
+        for i in self.plateau:
+            for n in range(4):
+                if i[n] == None: 
+                    i[n] = []
         return [self.plateau]
 
 
 #Tests
-#plateau_attendu = [[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]
-#plateau = Plateau(plateau_attendu)
+plateau_attendu = [[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]
+plateau = Plateau(plateau_attendu)
 
 #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
 #print(plateau.valider_plateau())
+print(plateau.état_plateau())
