@@ -13,12 +13,10 @@ def test_classe_joueur():
         "nom": "Alfred",
         "piles": [[1, 3], [1, 3], [1, 3]],
     }
-    print(état_joueur_attendu)
     joueur = Joueur(état_joueur_attendu["nom"],
                     1, état_joueur_attendu["piles"])
 
     état_joueur = joueur.état_joueur()
-    print(état_joueur)
     assert état_joueur == état_joueur_attendu, "Échec du test de la classe Joueur"
 
 
@@ -40,8 +38,8 @@ def test_classe_plateau():
         [[], [], [], []],
         [[], [], [], []],
     ]
-    plateau = Plateau(plateau_attendu)
     print(plateau_attendu)
+    plateau = Plateau(plateau_attendu)
     état_plateau = plateau.état_plateau()
     print(état_plateau)
 
@@ -83,10 +81,10 @@ if __name__ == "__main__":
     print("Test d'initialisation de la classe Joueur réussi")
     test_classe_gobblet()
     print("Test d'initialisation de la classe Gobblet réussi")
-    test_formater_un_jeu()
-    print("Test de formater_un_jeu réussi")
     test_classe_plateau()
     print("Test d'initialisation de la classe Plateau réussi")
+    test_formater_un_jeu()
+    print("Test de formater_un_jeu réussi")
 
 
 '''

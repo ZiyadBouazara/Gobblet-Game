@@ -44,19 +44,22 @@ class Plateau:
         if len(plateau) != 4:
             raise GobbletError(
                 'Le plateau ne possède pas le bon nombre de ligne')
+        réponse = []
         for i in plateau:
+            liste = []
             if len(i) != 4:
                 raise GobbletError(
                     'Le plateau ne possède pas le bon nombre de colonne dans les lignes')
-            for n in range(4):
-                if i[n] != [] and len(i[n]) != 2:
+            for n in i:
+                if n != [] and len(n) != 2:
                     raise GobbletError(
                         'Les Gobblets doivent être des listes de paires ou une liste vide')
-                elif i[n] == []:
-                    i[n] = None
-                elif len(i[n]) == 2:
-                    i[n] = Gobblet(i[n][1], i[n][0])
-        return (plateau)
+                elif n == []:
+                    liste.append(None)
+                elif len(n) == 2:
+                    liste.append(Gobblet(n[1], n[0]))
+            réponse.append(liste)
+        return réponse
     # OK TESTÉ
 
     def __str__(self):
@@ -159,13 +162,15 @@ class Plateau:
                     liste.append(n.état_gobblet())
             réponse.append(liste)
         return réponse
-# # Tests
-plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
-                    [[], [], [], []], [[], [], [], []]]
-print(plateau_attendu)
-plateau = Plateau(plateau_attendu)
-print(plateau.état_plateau())
-print(plateau_attendu)
-# #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
-# # print(plateau.valider_plateau())
+
+
+# # # Tests
+# plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
+#                    [[], [], [], []], [[], [], [], []]]
+# print(plateau_attendu)
+# plateau = Plateau(plateau_attendu)
 # print(plateau.état_plateau())
+# print(plateau_attendu)
+# # #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
+# # # print(plateau.valider_plateau())
+# # print(plateau.état_plateau())
