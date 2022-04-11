@@ -228,7 +228,7 @@ class Joueur:
         """
         liste = []
         for i in self.piles:
-            if i == None:
+            if i is None:
                 liste.append([])
             else:
                 liste.append(i.état_gobblet())
