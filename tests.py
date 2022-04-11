@@ -40,10 +40,11 @@ def test_classe_plateau():
         [[], [], [], []],
         [[], [], [], []],
     ]
-
+    print(plateau_attendu)
     plateau = Plateau(plateau_attendu)
 
     état_plateau = plateau.état_plateau()
+    print(état_plateau)
 
     assert état_plateau == plateau_attendu, "Échec du test de la classe Plateau"
 
@@ -78,7 +79,6 @@ def test_formater_un_jeu():
     assert résultat == attendu, f"Échec du test de formater_jeu"
 
 
-
 if __name__ == "__main__":
     test_classe_joueur()
     print("Test d'initialisation de la classe Joueur réussi")
@@ -88,7 +88,6 @@ if __name__ == "__main__":
     print("Test d'initialisation de la classe Plateau réussi")
     test_formater_un_jeu()
     print("Test de formater_un_jeu réussi")
-
 
 
 '''
