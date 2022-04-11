@@ -56,11 +56,11 @@ class Joueur:
         if no_joueur not in [1, 2]:
             raise GobbletError("Le numéro du joueur doit être 1 ou 2")
         for pile in gobelets:
-            if isinstance(pile, list) == False:
+            if isinstance(pile, list) is False:
                 raise GobbletError(
                     "Les piles de gobelets doivent être spécifiés sous la forme d'une liste")
             for i in pile:  # 5ieme Erreur
-                if isinstance(i, int) == False or len(pile) != 2:
+                if isinstance(i, int) is False or len(pile) != 2:
                     if pile != []:
                         raise GobbletError(
                             "Une pile doit être une liste de deux entiers ou une liste vide")
@@ -107,7 +107,7 @@ class Joueur:
             GobbletError: Le numéro de la pile doit être 0, 1 ou 2.
             GobbletError: Le joueur ne possède pas de gobelet pour la pile demandée.
         """
-        if isinstance(no_pile, int) == False:
+        if isinstance(no_pile, int) is False:
             raise GobbletError("Le numéro de la pile doit être un entier")
         if no_pile not in [0, 1, 2]:
             raise GobbletError("Le numéro de la pile doit être 0, 1 ou 2")
@@ -134,7 +134,7 @@ class Joueur:
             GobbletError: Le gobelet doit appartenir au joueur.
             GobbletError: Vous ne pouvez pas placer un gobelet à cet emplacement.
         """
-        if isinstance(no_pile, int) == False:
+        if isinstance(no_pile, int) is False:
             raise GobbletError("Le numéro de la pile doit être un entier")
         if no_pile not in [0, 1, 2]:
             raise GobbletError("Le numéro de la pile doit être 0, 1 ou 2")
@@ -184,34 +184,31 @@ class Joueur:
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
         destination = [int(destination[0]), int(destination[2])]
         if len(origin) != 1:
-            if isinstance(int(origin[0]), int) == False and isinstance(int(origin[-1]), int) == False:
+            if isinstance(int(origin[0]), int) is False \
+            and isinstance(int(origin[-1]), int) is False:
                 raise GobbletError(
                     "L'origine doit être un entier ou une liste de 2 entiers")
             if int(origin[0]) not in [0, 1, 2, 3] and int(origin[-1]) not in [0, 1, 2, 3]:
                 raise GobbletError(
                     "L'origine n'est pas une case valide du plateau")
-            if destination[0] not in (0, 1, 2, 3) and destination[1] not in (0, 1, 2, 3):
-                raise GobbletError(
-                    "La destination n'est pas une case valide du plateau")
             if int(origin[0]) != self.no_joueur:
                 raise GobbletError(
                     "Le gobelet d'origine n'appartient pas au joueur.")
             origin = [int(origin[0]), int(origin[-1])]
         else:
-            if origin.isdigit() == False:
+            if origin.isdigit() is False:
                 raise GobbletError(
                     "L'origine doit être un entier ou une liste de 2 entiers")
             origin = int(origin)
             if origin not in [0, 1, 2]:
                 raise GobbletError("L'origine n'est pas une pile valide")
-            if isinstance(self.piles[origin], Gobblet) == False:
-                raise("L'origine ne possède pas de gobelet")
-            if destination[0] not in (0, 1, 2, 3) and destination[1] not in (0, 1, 2, 3):
-                raise GobbletError(
-                    "La destination n'est pas une case valide du plateau")
-
-        if len(destination) != 2 or isinstance(destination[0], int) == False \
-                or isinstance(destination[1], int) == False:
+            if isinstance(self.piles[origin], Gobblet) is False:
+                raise GobbletError("L'origine ne possède pas de gobelet")
+        if destination[0] not in (0, 1, 2, 3) and destination[1] not in (0, 1, 2, 3):
+            raise GobbletError(
+                "La destination n'est pas une case valide du plateau")
+        if len(destination) != 2 or isinstance(destination[0], int) is False \
+                or isinstance(destination[1], int) is False:
             raise GobbletError(
                 "La destination doit être une liste de 2 entiers")
         return (origin, destination)

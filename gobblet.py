@@ -22,7 +22,14 @@ GOBBLET_REPRÉSENTATION = {
 
 
 class GobbletError(Exception):
+    """
+    GobbletError est une classe héritant de la class Exception
+    """
     def __str__(self):
+        """Constructeur d'exception
+        returns:
+            Message d'erreur
+        """
         return f"GobbletError: {self.args[0]}"
 
 
@@ -59,11 +66,11 @@ class Gobblet:
             GobbletError: Le numéro du joueur doit être un entier.
             GobbletError: Le numéro du joueur doit être 1 ou 2.
         """
-        if isinstance(grosseur, int) == False:
+        if isinstance(grosseur, int) is False:
             raise GobbletError('La grosseur doit être un entier')
         if grosseur not in [0, 1, 2, 3]:
             raise GobbletError('La grosseur doit être comprise entre 0 et 3')
-        if isinstance(no_joueur, int) == False:
+        if isinstance(no_joueur, int) is False:
             raise GobbletError('Le numéro du joueur doit être un entier')
         if no_joueur not in [1, 2]:
             raise GobbletError('Le numéro du joueur doit être 1 ou 2')
@@ -91,7 +98,8 @@ class Gobblet:
         Returns:
             bool: si les deux gobelets sont de même taille.
         """
-        return isinstance(autre, Gobblet) and isinstance(self, Gobblet) and (self.grosseur == autre.grosseur)
+        return isinstance(autre, Gobblet) and isinstance(self, Gobblet) and \
+        (self.grosseur == autre.grosseur)
 
     def __gt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -104,10 +112,9 @@ class Gobblet:
         """
         if self.no_joueur == 1:
             return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-                and (self.grosseur < autre.grosseur)
-        else:
-            return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-                and (autre.grosseur < self.grosseur)
+            and (self.grosseur < autre.grosseur)
+        return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
+        and (autre.grosseur < self.grosseur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -157,7 +164,8 @@ class Gobblet:
         """Obtenir l'état du gobelet.
 
         Returns:
-            list: la paire d'entiers représentant l'état du gobelet (numéro du joueur et grosseur du gobelet).
+            list: la paire d'entiers représentant l'état du gobelet 
+            (numéro du joueur et grosseur du gobelet).
         """
         return [self.no_joueur, self.grosseur]
 

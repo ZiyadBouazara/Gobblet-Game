@@ -39,7 +39,7 @@ class Plateau:
             GobbletError: Les Gobblets doivent être des listes de paires ou une liste vide
         """
         # OK
-        if type(plateau) != list:
+        if isinstance(plateau, list) is False:
             raise GobbletError('Le plateau doit être une liste')
         if len(plateau) != 4:
             raise GobbletError(
@@ -54,7 +54,7 @@ class Plateau:
                 if n != [] and len(n) != 2:
                     raise GobbletError(
                         'Les Gobblets doivent être des listes de paires ou une liste vide')
-                elif n == []:
+                if n == []:
                     liste.append(None)
                 elif len(n) == 2:
                     liste.append(Gobblet(n[1], n[0]))
@@ -71,7 +71,7 @@ class Plateau:
         plateau_formaté = ""
         for i in self.plateau:
             for n in range(4):
-                if i[n] == None:
+                if i[n] is None:
                     i[n] = '   '
         for i in range(4):
             # On établie et formate les 4 gobblets respectifs a chaque ligne
@@ -105,7 +105,7 @@ class Plateau:
         # Je retourne la version formatée du gobblet
 
         # Errors MOdifier erreur 1 OKAY MODIFIER
-        if type(no_colonne) != int or type(no_ligne) != int:
+        if isinstance(no_colonne, int) is False or isinstance(no_colonne, int) is False:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -134,14 +134,15 @@ class Plateau:
         """
 
         # OK
-        if type(no_colonne) != int or type(no_ligne) != int:
+        if isinstance(no_colonne, int) is False or isinstance(no_colonne, int) is False:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
         if no_colonne not in (0, 1, 2, 3):
             raise GobbletError(
                 'Le numéro de la colonne doit être 0, 1, 2 ou 3')
-        if self.plateau[no_ligne][no_colonne] is not None and self.plateau[no_ligne][no_colonne][1] >= gobblet[1]:
+        if self.plateau[no_ligne][no_colonne] is not None \
+        and self.plateau[no_ligne][no_colonne][1] >= gobblet[1]:
             raise GobbletError(
                 'Le Gobblet ne peut pas être placé sur la case demandée')  # double check
     # OK
@@ -171,6 +172,7 @@ class Plateau:
 # plateau = Plateau(plateau_attendu)
 # print(plateau.état_plateau())
 # print(plateau_attendu)
-# # #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
+#print(plateau.valider_plateau(
+# [[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
 # # # print(plateau.valider_plateau())
 # # print(plateau.état_plateau())
