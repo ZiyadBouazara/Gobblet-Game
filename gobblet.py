@@ -164,7 +164,7 @@ class Gobblet:
         """Obtenir l'état du gobelet.
 
         Returns:
-            list: la paire d'entiers représentant l'état du gobelet 
+            list: la paire d'entiers représentant l'état du gobelet
             (numéro du joueur et grosseur du gobelet).
         """
         return [self.no_joueur, self.grosseur]
