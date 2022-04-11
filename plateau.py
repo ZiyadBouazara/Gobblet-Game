@@ -142,7 +142,7 @@ class Plateau:
             raise GobbletError(
                 'Le numéro de la colonne doit être 0, 1, 2 ou 3')
         if self.plateau[no_ligne][no_colonne] is not None \
-                and self.plateau[no_ligne][no_colonne][1] >= gobblet[1]:
+                and self.plateau[no_ligne][no_colonne].grosseur >= gobblet.grosseur:
             raise GobbletError(
                 'Le Gobblet ne peut pas être placé sur la case demandée')  # double check
     # OK
