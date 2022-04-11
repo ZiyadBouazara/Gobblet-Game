@@ -4,7 +4,6 @@ Functions:
     * Joueur - Classe représentant un joueur de Gobblet.
 """
 
-from ast import Str
 from gobblet import Gobblet, GobbletError
 
 
@@ -185,17 +184,17 @@ class Joueur:
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
         if len(origin) != 1:
             if isinstance(int(origin[0]), int) is False \
-            and isinstance(int(origin[-1]), int) is False:
+                    and isinstance(int(origin[-1]), int) is False:
                 raise GobbletError(
                     "L'origine doit être un entier ou une liste de 2 entiers")
             if int(origin[0]) not in [0, 1, 2, 3] and int(origin[-1]) not in [0, 1, 2, 3]:
                 raise GobbletError(
                     "L'origine n'est pas une case valide du plateau")
             if isinstance(plateau.plateau[int(origin[0])][int(origin[-1])], Gobblet) and \
-            plateau.plateau[int(origin[0])][int(origin[-1])].no_joueur != self.no_joueur:
+                    plateau.plateau[int(origin[0])][int(origin[-1])].no_joueur != self.no_joueur:
                 raise GobbletError(
                     "Le gobelet d'origine n'appartient pas au joueur")
-            if type(plateau.plateau[int(origin[0])][int(origin[-1])]) == False:
+            if type(plateau.plateau[int(origin[0])][int(origin[-1])]) is False:
                 raise GobbletError(
                     "L'origine ne possède pas de gobelet")
             origin = [int(origin[0]), int(origin[-1])]
@@ -206,7 +205,7 @@ class Joueur:
             origin = int(origin)
             if origin not in [0, 1, 2]:
                 raise GobbletError("L'origine n'est pas une pile valide")
-            #if isinstance(self.piles[origin], Gobblet) is False:
+            # if isinstance(self.piles[origin], Gobblet) is False:
             #    raise GobbletError("L'origine ne possède pas de gobelet")
         if int(destination[0]) not in (0, 1, 2, 3) or int(destination[-1]) not in (0, 1, 2, 3):
             raise GobbletError(
