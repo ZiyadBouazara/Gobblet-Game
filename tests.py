@@ -38,10 +38,8 @@ def test_classe_plateau():
         [[], [], [], []],
         [[], [], [], []],
     ]
-    print(plateau_attendu)
     plateau = Plateau(plateau_attendu)
     état_plateau = plateau.état_plateau()
-    print(état_plateau)
 
     assert état_plateau == plateau_attendu, "Échec du test de la classe Plateau"
 
