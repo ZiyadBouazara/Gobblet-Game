@@ -40,9 +40,8 @@ def test_classe_plateau():
         [[], [], [], []],
         [[], [], [], []],
     ]
-    print(plateau_attendu)
     plateau = Plateau(plateau_attendu)
-
+    print(plateau_attendu)
     état_plateau = plateau.état_plateau()
     print(état_plateau)
 
