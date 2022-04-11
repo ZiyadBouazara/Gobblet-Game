@@ -191,7 +191,9 @@ class Joueur:
             if int(origin[0]) not in [0, 1, 2, 3] and int(origin[-1]) not in [0, 1, 2, 3]:
                 raise GobbletError(
                     "L'origine n'est pas une case valide du plateau")
-            if int(origin[0]) != self.no_joueur:
+            if isinstance(plateau.plateau[origin[0]][origin[1]], Gobblet) is False:
+                raise GobbletError("L'origine ne possède pas de gobelet")
+            if plateau.plateau[origin[0]][origin[1]].no_joueur != self.no_joueur:
                 raise GobbletError(
                     "Le gobelet d'origine n'appartient pas au joueur.")
             origin = [int(origin[0]), int(origin[-1])]
