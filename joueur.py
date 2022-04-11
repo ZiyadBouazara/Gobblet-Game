@@ -183,7 +183,6 @@ class Joueur:
         origin = input(
             'Donnez le numéro de la pile (p) ou la position sur le plateau (x,y):')
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
-        destination = [int(destination[0]), int(destination[-1])]
         if len(origin) != 1:
             if isinstance(int(origin[0]), int) is False \
             and isinstance(int(origin[-1]), int) is False:
@@ -209,13 +208,14 @@ class Joueur:
                 raise GobbletError("L'origine n'est pas une pile valide")
             if isinstance(self.piles[origin], Gobblet) is False:
                 raise GobbletError("L'origine ne possède pas de gobelet")
-        if destination[0] not in (0, 1, 2, 3) and destination[1] not in (0, 1, 2, 3):
+        if int(destination[0]) not in (0, 1, 2, 3) and int(destination[-1]) not in (0, 1, 2, 3):
             raise GobbletError(
                 "La destination n'est pas une case valide du plateau")
-        if len(destination) != 2 or isinstance(destination[0], int) is False \
-                or isinstance(destination[1], int) is False:
+        if len(destination) != 3 or isinstance(int(destination[0]), int) is False \
+                or isinstance(int(destination[-1]), int) is False:
             raise GobbletError(
                 "La destination doit être une liste de 2 entiers")
+        destination = [int(destination[0]), int(destination[-1])]
         return (origin, destination)
 
     def état_joueur(self):
