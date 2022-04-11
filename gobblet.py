@@ -25,6 +25,7 @@ class GobbletError(Exception):
     """
     GobbletError est une classe héritant de la class Exception
     """
+
     def __str__(self):
         """Constructeur d'exception
         returns:
@@ -99,7 +100,7 @@ class Gobblet:
             bool: si les deux gobelets sont de même taille.
         """
         return isinstance(autre, Gobblet) and isinstance(self, Gobblet) and \
-        (self.grosseur == autre.grosseur)
+            (self.grosseur == autre.grosseur)
 
     def __gt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -111,7 +112,7 @@ class Gobblet:
             bool: si ce gobelet est plus gros que l'autre.
         """
         return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-        and (self.grosseur > autre.grosseur)
+            and (self.grosseur > autre.grosseur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
