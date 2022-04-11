@@ -151,14 +151,6 @@ class Plateau:
         Returns:
             list: Liste contenant l'état du plateau tel que représenté dans l'énoncé
         """
-        # for i in self.plateau:
-        # for n in range(4):
-        # if i[n] is None:
-        #   i[n] = []
-        # else:
-        #  i[n] = Gobblet(i[n][1], i[n][0]).état_gobblet()
-        # return [self.plateau]
-
         réponse = []
         for i in self.plateau:
             liste = []
@@ -169,8 +161,6 @@ class Plateau:
                     liste.append(i[n].état_gobblet())
             réponse.append(liste)
         return réponse
-
-
 # # Tests
 # plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
 #                    [[], [], [], []], [[], [], [], []]]

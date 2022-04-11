@@ -197,6 +197,9 @@ class Joueur:
                     plateau[origin[0]][origin[1]].grosseur:
                 raise GobbletError(
                     "La destination n'est pas une case valide du plateau")
+            if origin[0] != self.no_joueur:
+                raise GobbletError(
+                    "Le gobelet d'origine n'appartient pas au joueur.")
 
         else:
             if origin.isdigit() == False:
