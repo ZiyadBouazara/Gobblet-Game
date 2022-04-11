@@ -188,8 +188,8 @@ def formater_jeu(plateau, joueurs):
         str: Représentation du jeu.
     """
     r = ''
-    len1 = len(joueurs[0]['nom'])
-    len2 = len(joueurs[1]['nom'])
+    len1 = len(joueurs[0].nom)
+    len2 = len(joueurs[1].nom)
     espace = max(len1, len2) - min(len1, len2)
     for i, e in enumerate(joueurs):
         if i == 0 and len1 < len2:

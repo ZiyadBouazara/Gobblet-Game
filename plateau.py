@@ -154,18 +154,19 @@ class Plateau:
         réponse = []
         for i in self.plateau:
             liste = []
-            for n in range(4):
-                if i[n] is None:
+            for n in i:
+                if n is None:
                     liste.append([])
                 else:
-                    liste.append(i[n].état_gobblet())
+                    liste.append(n.état_gobblet())
             réponse.append(liste)
         return réponse
 # # Tests
-# plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
-#                    [[], [], [], []], [[], [], [], []]]
-# plateau = Plateau(plateau_attendu)
-
+plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
+                    [[], [], [], []], [[], [], [], []]]
+print(plateau_attendu)
+plateau = Plateau(plateau_attendu)
+print(plateau.état_plateau())
 # #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
 # # print(plateau.valider_plateau())
 # print(plateau.état_plateau())

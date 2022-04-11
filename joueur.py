@@ -184,23 +184,20 @@ class Joueur:
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
         destination = [int(destination[0]), int(destination[2])]
         if len(origin) != 1:
-            origin = [int(origin[0]), int(origin[2])]
-            for i in origin:
-                if isinstance(i, int) == False:
-                    raise GobbletError(
-                        "L'origine doit être un entier ou une liste de 2 entiers")
-                if i not in [0, 1, 2, 3]:
-                    raise GobbletError(
-                        "L'origine n'est pas une case valide du plateau")
+            if isinstance(int(origin[0]), int) == False and isinstance(int(origin[-1]), int) == False:
+                raise GobbletError(
+                    "L'origine doit être un entier ou une liste de 2 entiers")
+            if int(origin[0]) not in [0, 1, 2, 3] and int(origin[-1]) not in [0, 1, 2, 3]:
+                raise GobbletError(
+                    "L'origine n'est pas une case valide du plateau")
             if isinstance(plateau[destination[0]][destination[1]], Gobblet) and \
                     plateau[destination[0]][destination[1]].grosseur >= \
-                    plateau[origin[0]][origin[1]].grosseur:
+                    plateau[int(origin[0])][int(origin[1])].grosseur:
                 raise GobbletError(
                     "La destination n'est pas une case valide du plateau")
-            if origin[0] != self.no_joueur:
+            if int(origin[0]) != self.no_joueur:
                 raise GobbletError(
                     "Le gobelet d'origine n'appartient pas au joueur.")
-
         else:
             if origin.isdigit() == False:
                 raise GobbletError(
@@ -210,11 +207,11 @@ class Joueur:
                 raise GobbletError("L'origine n'est pas une pile valide")
             if isinstance(self.piles[origin], Gobblet) == False:
                 raise("L'origine ne possède pas de gobelet")
-            if isinstance(plateau[destination[0]][destination[1]], Gobblet) and \
-                    plateau[destination[0]][destination[1]].grosseur >= \
-                    self.piles[origin].grosseur:
-                raise GobbletError(
-                    "La destination n'est pas une case valide du plateau")
+            #if isinstance(plateau[destination[0]][destination[1]], Gobblet) and \
+             #       plateau[destination[0]][destination[1]].grosseur >= \
+              #      self.piles[origin].grosseur:
+               #     raise GobbletError(
+                #    "La destination n'est pas une case valide du plateau")
 
         if len(destination) != 2 or isinstance(destination[0], int) == False \
                 or isinstance(destination[1], int) == False:
