@@ -110,11 +110,8 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus gros que l'autre.
         """
-        if self.no_joueur == 1:
-            return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-            and (self.grosseur < autre.grosseur)
         return isinstance(autre, Gobblet) and isinstance(self, Gobblet)\
-        and (autre.grosseur < self.grosseur)
+        and (self.grosseur > autre.grosseur)
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -147,7 +144,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus grand ou égal à l'autre.
         """
-        return not Gobblet.__gt__(self, autre)
+        return not Gobblet.__lt__(self, autre)
 
     def __le__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -158,7 +155,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit ou égal à l'autre.
         """
-        return Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre)
+        return Gobblet.__eq__(self, autre) or Gobblet.__lt__(self, autre)
 
     def état_gobblet(self):
         """Obtenir l'état du gobelet.

@@ -88,8 +88,8 @@ if __name__ == "__main__":
 
 
 
-"""
+
 gobblet = Gobblet(2, 1)
-x = Gobblet(3, 2)
-print(x.__le__(gobblet))
-"""
+x = Gobblet(1, 2)
+print(x.__ge__(gobblet))
+print(x >= gobblet)

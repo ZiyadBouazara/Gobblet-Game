@@ -206,9 +206,9 @@ class Joueur:
             origin = int(origin)
             if origin not in [0, 1, 2]:
                 raise GobbletError("L'origine n'est pas une pile valide")
-            if isinstance(self.piles[origin], Gobblet) is False:
-                raise GobbletError("L'origine ne possède pas de gobelet")
-        if int(destination[0]) not in (0, 1, 2, 3) and int(destination[-1]) not in (0, 1, 2, 3):
+            #if isinstance(self.piles[origin], Gobblet) is False:
+            #    raise GobbletError("L'origine ne possède pas de gobelet")
+        if int(destination[0]) not in (0, 1, 2, 3) or int(destination[-1]) not in (0, 1, 2, 3):
             raise GobbletError(
                 "La destination n'est pas une case valide du plateau")
         if len(destination) != 3 or isinstance(int(destination[0]), int) is False \
