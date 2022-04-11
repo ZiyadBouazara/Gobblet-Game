@@ -108,7 +108,7 @@ def jouer_coup(id_partie, origine, destination, idul, secret):
         origine (int ou list): l'origine est soit un entier représentant
                                le numéro de la pile du joueur ou une liste de 2 entier [x, y]
                                représentant le Gobblet sur le plateau.
-        destination (list): la destination estune liste de 2 entier [x, y]
+        destination (list): la destination est une liste de 2 entier [x, y]
                             représentant le Gobblet sur le plateau
         idul (str): idul du joueur
         secret (str): secret récupérer depuis le site de PAX

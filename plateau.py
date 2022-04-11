@@ -99,9 +99,7 @@ class Plateau:
             GobbletError: Le plateau ne possède pas de Gobblet pour la case demandée
         """
         # J'accède à l'information pour formater le gobblet
-        gobblet_retiré = self.plateau[no_ligne][no_colonne]
         # Je retourne la version formatée du gobblet
-        gobblet_formaté = gobblet_retiré.__str__()
 
         # Errors MOdifier erreur 1 OKAY MODIFIER
         if type(no_colonne) != int or type(no_ligne) != int:
@@ -115,7 +113,7 @@ class Plateau:
             raise GobbletError(
                 'Le plateau ne possède pas de Gobblet pour la case demandée')
 
-        return gobblet_formaté
+        return self.plateau[no_ligne][no_colonne].__str__()
 
     def placer_gobblet(self, no_colonne, no_ligne, gobblet):
         """Placer un Gobblet dans le plateau
@@ -140,7 +138,7 @@ class Plateau:
         if no_colonne not in (0, 1, 2, 3):
             raise GobbletError(
                 'Le numéro de la colonne doit être 0, 1, 2 ou 3')
-        if self.plateau[no_ligne][no_colonne] is not None and self.plateau[no_ligne][no_colonne][0] >= gobblet[0]:
+        if self.plateau[no_ligne][no_colonne] is not None and self.plateau[no_ligne][no_colonne][1] >= gobblet[1]:
             raise GobbletError(
                 'Le Gobblet ne peut pas être placé sur la case demandée')  # double check
     # OK
@@ -167,6 +165,7 @@ plateau_attendu = [[[], [], [], []], [[], [], [2, 3], []],
 print(plateau_attendu)
 plateau = Plateau(plateau_attendu)
 print(plateau.état_plateau())
+print(plateau_attendu)
 # #print(plateau.valider_plateau([[[], [], [], []],[[], [], [2, 3], []],[[], [], [], []],[[], [], [], []]]))
 # # print(plateau.valider_plateau())
 # print(plateau.état_plateau())
