@@ -85,11 +85,3 @@ if __name__ == "__main__":
     print("Test d'initialisation de la classe Plateau réussi")
     test_formater_un_jeu()
     print("Test de formater_un_jeu réussi")
-
-
-
-
-gobblet = Gobblet(2, 1)
-x = Gobblet(1, 2)
-print(x.__ge__(gobblet))
-print(x >= gobblet)
