@@ -73,7 +73,7 @@ def test_formater_un_jeu():
 
     résultat = formater_jeu(plateau, [joueur1, joueur2])
 
-    assert résultat == attendu, f"Échec du test de formater_jeu"
+    assert résultat == attendu, "Échec du test de formater_jeu"
 
 
 if __name__ == "__main__":
@@ -87,13 +87,9 @@ if __name__ == "__main__":
     print("Test de formater_un_jeu réussi")
 
 
-'''
-Test pour les surcharges 
-gobblet = Gobblet(3, 1)
-x = Gobblet(1, 2)
-print(x.__le__(gobblet))
 
-y = Gobblet(3, 1)
-z = Gobblet(1, 2)
-print(z.état_gobblet())
-'''
+"""
+gobblet = Gobblet(2, 1)
+x = Gobblet(3, 2)
+print(x.__le__(gobblet))
+"""
