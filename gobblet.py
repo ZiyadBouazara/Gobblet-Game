@@ -180,6 +180,8 @@ def interpréteur_de_commande():
     parser.add_argument('IDUL', help='IDUL du joueur')
     parser.add_argument('-l', '--lister',
                         action='store_true', help='Lister les parties existantes')
+    parser.add_argument('-a', '--automatique',
+                        action='store_true', help='Activer le mode automatique')
     return parser.parse_args()
 
 
