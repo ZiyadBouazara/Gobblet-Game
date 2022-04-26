@@ -163,4 +163,3 @@ class Plateau:
                     liste.append(n.état_gobblet())
             réponse.append(liste)
         return réponse
-        
