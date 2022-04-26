@@ -5,7 +5,7 @@ Functions:
 """
 
 from gobblet import Gobblet, GobbletError
-
+from plateau import Plateau
 
 class Joueur:
     """
@@ -138,12 +138,12 @@ class Joueur:
             raise GobbletError("Le numéro de la pile doit être un entier")
         if no_pile not in [0, 1, 2]:
             raise GobbletError("Le numéro de la pile doit être 0, 1 ou 2")
-        if len(gobelets) != 2:
+        if self.no_joueur != gobelets.no_joueur:
             raise GobbletError(
-                "GobbletError: Le gobelet doit appartenir au joueur")
+                "Le gobelet doit appartenir au joueur")
         if self.piles[no_pile] is not None:
             raise GobbletError(
-                "GobbletError: Vous ne pouvez pas placer un gobelet à cet emplacement")
+                "Vous ne pouvez pas placer un gobelet à cet emplacement")
         self.piles[no_pile] = gobelets
 
     def récupérer_le_coup(self, plateau):
@@ -183,6 +183,9 @@ class Joueur:
             'Donnez le numéro de la pile (p) ou la position sur le plateau (x,y):')
         destination = input('Où voulez-vous placer votre gobelet (x,y):')
         if len(origin) != 1:
+            if isinstance(origin[0], str) or isinstance(origin[-2], str):
+                raise GobbletError(
+                    "L'origine doit être un entier ou une liste de 2 entiers")
             if isinstance(int(origin[0]), int) is False \
                     and isinstance(int(origin[-1]), int) is False:
                 raise GobbletError(
@@ -203,7 +206,7 @@ class Joueur:
                 raise GobbletError(
                     "L'origine doit être un entier ou une liste de 2 entiers")
             origin = int(origin)
-            if origin not in [0, 1, 2]:
+            if origin not in [0, 1, 2] or origin in [-1, -2]:
                 raise GobbletError("L'origine n'est pas une pile valide")
             if isinstance(self.piles[origin], Gobblet) is False:
                 raise GobbletError("L'origine ne possède pas de gobelet")
@@ -230,14 +233,3 @@ class Joueur:
             else:
                 liste.append(i.état_gobblet())
         return {"nom": self.nom, "piles": liste}
-
-
-nom = 'Robert'
-no_joueur = 1
-piles = [[1, 0], [1, 0], [1, 0]]
-joueur = Joueur(nom, no_joueur, piles)
-
-gobblet = joueur.retirer_gobblet(0)
-gobblet != joueur.piles[0]
-print(type(gobblet))
-print(type(joueur.piles[0]))
