@@ -114,7 +114,7 @@ class Joueur:
         if self.piles[no_pile] is None:
             raise GobbletError(
                 "Le joueur ne possède pas de gobelet pour la pile demandée")
-        return self.piles[no_pile]
+        return self.piles[no_pile] and self.piles.remove(self.piles[no_pile])
 
     def placer_gobblet(self, no_pile, gobelets):
         """Placer un gobelet dans la pile.
@@ -232,5 +232,12 @@ class Joueur:
         return {"nom": self.nom, "piles": liste}
 
 
-# T = Joueur('Ziyad', 2, [[1, 2], [2, 1], []])
-# print(T)
+nom = 'Robert'
+no_joueur = 1
+piles = [[1, 0], [1, 0], [1, 0]]
+joueur = Joueur(nom, no_joueur, piles)
+
+gobblet = joueur.retirer_gobblet(0)
+gobblet != joueur.piles[0]
+print(type(gobblet))
+print(type(joueur.piles[0]))
