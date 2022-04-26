@@ -115,8 +115,8 @@ class Plateau:
         if self.plateau[no_ligne][no_colonne] == []:
             raise GobbletError(
                 'Le plateau ne possède pas de Gobblet pour la case demandée')
-
-        return self.plateau[no_ligne][no_colonne].__str__()
+        
+        return self.plateau[no_ligne][no_colonne]
 
     def placer_gobblet(self, no_colonne, no_ligne, gobblet):
         """Placer un Gobblet dans le plateau
@@ -163,3 +163,7 @@ class Plateau:
                     liste.append(n.état_gobblet())
             réponse.append(liste)
         return réponse
+
+plateau = [[[1, 0], [1, 2], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]]
+plateau = Plateau(plateau)
+print(plateau.retirer_gobblet(1, 0))
