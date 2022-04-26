@@ -105,7 +105,7 @@ class Plateau:
         # Je retourne la version formatée du gobblet
 
         # Errors MOdifier erreur 1 OKAY MODIFIER
-        if isinstance(no_colonne, int) is False or isinstance(no_colonne, int) is False:
+        if isinstance(no_ligne, int) is False or isinstance(no_colonne, int) is False:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -134,7 +134,7 @@ class Plateau:
         """
 
         # OK
-        if isinstance(no_colonne, int) is False or isinstance(no_colonne, int) is False:
+        if isinstance(no_ligne, int) is False or isinstance(no_colonne, int) is False:
             raise GobbletError('Ligne et colonne doivent être des entiers')
         if no_ligne not in (0, 1, 2, 3):
             raise GobbletError('Le numéro de la ligne doit être 0, 1, 2 ou 3')
@@ -163,7 +163,3 @@ class Plateau:
                     liste.append(n.état_gobblet())
             réponse.append(liste)
         return réponse
-
-plateau = [[[1, 0], [1, 2], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]]
-plateau = Plateau(plateau)
-print(plateau.retirer_gobblet(1, 0))
