@@ -182,9 +182,10 @@ class Plateau:
     def __getitem__(self, indice):
         return self.plateau[indice[0]][indice[1]]
 
-plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]
+plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
 plateau = Plateau(plateau)
 print(plateau)
 plateau.état_plateau()
 print(plateau.état_plateau())
 print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
+print(plateau[1, 1])
