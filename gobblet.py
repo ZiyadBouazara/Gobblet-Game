@@ -122,7 +122,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus petit que l'autre.
         """
-        return not (Gobblet.__eq__(self, autre) or Gobblet.__gt__(self, autre))
+        return not (self.__eq__(autre) or self.__gt__(autre))
 
     def __ne__(self, autre):
         """Comparer l'équivalence de deux gobelets.
