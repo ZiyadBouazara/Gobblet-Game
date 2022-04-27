@@ -88,7 +88,7 @@ def récupérer_partie(id_partie, idul, secret):
             de l'état du plateau de jeu et de la liste des joueurs,
             après avoir décodé le JSON de sa réponse.
     """
-    rep = requests.get(URL + 'partie' + id_partie, auth=(idul, secret))
+    rep = requests.get(URL + 'partie/' + id_partie, auth=(idul, secret))
     dicti = rep.json()
     if rep.status_code == 401:
         raise PermissionError(dicti['message'])
@@ -96,9 +96,8 @@ def récupérer_partie(id_partie, idul, secret):
         raise RuntimeError(dicti['message'])
     if rep.status_code not in (200, 401, 406):
         raise ConnectionError
-    return (dicti['id'], dicti['plateau'], dicti['joueurs'],
-            dicti['gagnant'] if dicti['gagnant'] is not None else None)
 
+    return (dicti['id'], dicti['plateau'], dicti['joueurs'])
 
 def jouer_coup(id_partie, origine, destination, idul, secret):
     """Jouer un coup
