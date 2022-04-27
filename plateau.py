@@ -46,18 +46,19 @@ class Plateau:
                 'Le plateau ne possède pas le bon nombre de ligne')
         réponse = []
         for i in plateau:
-            liste = []
+            liste = [[], [], [], []]
             if len(i) != 4:
                 raise GobbletError(
                     'Le plateau ne possède pas le bon nombre de colonne dans les lignes')
-            for n in i:
-                if n != [] and len(n) != 2:
-                    raise GobbletError(
-                        'Les Gobblets doivent être des listes de paires ou une liste vide')
+            for v, n in enumerate(i):
                 if n == []:
-                    liste.append(None)
-                elif len(n) == 2:
-                    liste.append(Gobblet(n[1], n[0]))
+                    liste[v] = None
+                elif len(n) >= 2:
+                    for j in n:
+                        if j != [] and len(j) != 2:
+                            raise GobbletError(
+                                'Les Gobblets doivent être des listes de paires ou une liste vide')
+                        liste[v].append(Gobblet(j[1], j[0]))
             réponse.append(liste)
         return réponse
     # OK TESTÉ
@@ -69,20 +70,33 @@ class Plateau:
             str: Représentation du plateau avec ses Gobblet
         """
         plateau_formaté = ""
-        for i in self.plateau:
-            for n in range(4):
-                if i[n] is None:
-                    i[n] = '   '
+        #for i in self.plateau:
+            #for n in range(4):
+                #if i[n] is None:
+                    #i[n] = '   '
+        for w, i in enumerate(self.plateau):
+            gobblet = []
+            for b, y in enumerate(i):
+                if y is None:
+                    gobblet.append('   ')
+                else:
+                    gobblet.append(y[-1].__str__())
+            plateau_formaté += f"{3-w}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n" 
+            if 3-w != 0:
+                plateau_formaté += " ───┼───┼───┼───\n"
+            else:
+                plateau_formaté += "  0   1   2   3 "
+        '''
         for i in range(4):
-            # On établie et formate les 4 gobblets respectifs a chaque ligne
+            #On établie et formate les 4 gobblets respectifs a chaque ligne
             gobblet = [(self.plateau[i][0]).__str__(), (self.plateau[i][1]).__str__(
             ), (self.plateau[i][2]).__str__(), (self.plateau[i][3]).__str__()]
-            plateau_formaté += f"{3-i}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n"
+            plateau_formaté += f"{3-i}{gobblet[0][-1]}|{gobblet[1][-1]}|{gobblet[2][-1]}|{gobblet[3][-1]}\n" 
             if 3-i != 0:
                 plateau_formaté += " ───┼───┼───┼───\n"
             else:
                 plateau_formaté += "  0   1   2   3 "
-
+        '''
         return plateau_formaté
 
     def retirer_gobblet(self, no_colonne, no_ligne):
@@ -155,11 +169,21 @@ class Plateau:
         """
         réponse = []
         for i in self.plateau:
-            liste = []
-            for n in i:
+            liste = [[], [], [], []]
+            for v, n in enumerate(i):
                 if n is None:
-                    liste.append([])
+                    pass
                 else:
-                    liste.append(n.état_gobblet())
+                    for g in n:
+                        liste[v].append(g.état_gobblet())
             réponse.append(liste)
         return réponse
+    
+    def __getitem__(self, indice):
+        return self.plateau[indice[0]][indice[1]]
+
+plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]
+plateau = Plateau(plateau)
+print(plateau)
+plateau.état_plateau()
+print(plateau.état_plateau())
