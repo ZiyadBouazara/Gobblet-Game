@@ -193,11 +193,11 @@ class Joueur:
             if int(origin[0]) not in [0, 1, 2, 3] and int(origin[-1]) not in [0, 1, 2, 3]:
                 raise GobbletError(
                     "L'origine n'est pas une case valide du plateau")
-            if isinstance(plateau.plateau[int(origin[0])][int(origin[-1])], Gobblet) and \
-                    plateau.plateau[int(origin[0])][int(origin[-1])].no_joueur != self.no_joueur:
+            if isinstance(plateau.plateau[int(origin[0])][int(origin[-1])][-1], Gobblet) and \
+                    plateau.plateau[int(origin[0])][int(origin[-1])][-1].no_joueur != self.no_joueur:
                 raise GobbletError(
                     "Le gobelet d'origine n'appartient pas au joueur")
-            if type(plateau.plateau[int(origin[0])][int(origin[-1])]) is False:
+            if type(plateau.plateau[int(origin[0])][int(origin[-1])][-1]) is False:
                 raise GobbletError(
                     "L'origine ne possède pas de gobelet")
             origin = [int(origin[0]), int(origin[-1])]
@@ -233,3 +233,28 @@ class Joueur:
             else:
                 liste.append(i.état_gobblet())
         return {"nom": self.nom, "piles": liste}
+
+class Automate(Joueur):
+    def récupérer_le_coup(self, plateau):
+        for i in self.piles:
+            if i != 2:
+                origin, destination = Automate.premier_coup(plateau)
+        
+        return (origin, destination)
+    
+    def premier_coup(self, plateau):
+        origin = 0
+        if plateau[0, 0][-1] is None:
+            destination = [0, 0]
+        else:
+            destination = [0, 3]
+        return (origin, destination)
+
+    def game_winner(self, plateau):
+        for a in range(4):
+            liste = []
+            if isinstance(plateau[a, 0][-1], Gobblet):
+                if plateau[a, 0][-1].no_joueur == self.no_joueur:
+                    liste.append(plateau[a, 0][-1])
+            if len(liste) == 3:
+                print('sja')
