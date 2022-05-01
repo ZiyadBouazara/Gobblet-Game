@@ -236,25 +236,19 @@ class Joueur:
 
 class Automate(Joueur):
     def récupérer_le_coup(self, plateau):
-        for i in self.piles:
-            if i != 2:
-                origin, destination = Automate.premier_coup(plateau)
-        
-        return (origin, destination)
-    
-    def premier_coup(self, plateau):
-        origin = 0
-        if plateau[0, 0][-1] is None:
-            destination = [0, 0]
-        else:
-            destination = [0, 3]
-        return (origin, destination)
+        couple = []
 
-    def game_winner(self, plateau):
-        for a in range(4):
-            liste = []
-            if isinstance(plateau[a, 0][-1], Gobblet):
-                if plateau[a, 0][-1].no_joueur == self.no_joueur:
-                    liste.append(plateau[a, 0][-1])
-            if len(liste) == 3:
-                print('sja')
+        for i in range(4):
+            for y in range(4):
+                if plateau[i, y] is None:
+                    if len(self.piles) != 0:
+                        for b, _ in enumerate(self.piles):
+                            couple.append(([i, y], b))
+                else:
+                    if len(self.piles) != 0:
+                        for o, b in enumerate(self.piles):
+                            if plateau[i, y][-1].grosseur < b.grosseur:
+                                couple.append(([i, y], o))
+            
+
+
