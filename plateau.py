@@ -51,9 +51,7 @@ class Plateau:
                 raise GobbletError(
                     'Le plateau ne possède pas le bon nombre de colonne dans les lignes')
             for v, n in enumerate(i):
-                if n == []:
-                    liste[v] = None
-                elif len(n) >= 2:
+                if len(n) >= 2:
                     for j in n:
                         if j != [] and len(j) != 2:
                             raise GobbletError(
@@ -77,7 +75,7 @@ class Plateau:
         for w, i in enumerate(self.plateau):
             gobblet = []
             for b, y in enumerate(i):
-                if y is None:
+                if y == []:
                     gobblet.append('   ')
                 else:
                     gobblet.append(y[-1].__str__())
@@ -130,7 +128,7 @@ class Plateau:
             raise GobbletError(
                 'Le plateau ne possède pas de Gobblet pour la case demandée')
 
-        return self.plateau[no_ligne][no_colonne]
+        return self.plateau[no_ligne][no_colonne][-1]
 
     def placer_gobblet(self, no_colonne, no_ligne, gobblet):
         """Placer un Gobblet dans le plateau
@@ -171,7 +169,7 @@ class Plateau:
         for i in self.plateau:
             liste = [[], [], [], []]
             for v, n in enumerate(i):
-                if n is None:
+                if n == []:
                     pass
                 else:
                     for g in n:
@@ -182,10 +180,10 @@ class Plateau:
     def __getitem__(self, indice):
         return self.plateau[indice[0]][indice[1]]
 
-# plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
-# plateau = Plateau(plateau)
-# print(plateau)
-# plateau.état_plateau()
-# print(plateau.état_plateau())
-# print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
-# print(plateau[1, 1])
+plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
+plateau = Plateau(plateau)
+print(plateau)
+plateau.état_plateau()
+print(plateau.état_plateau())
+print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
+print(plateau[1, 1])
