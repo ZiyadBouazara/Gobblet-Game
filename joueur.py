@@ -236,19 +236,28 @@ class Joueur:
 
 class Automate(Joueur):
     def récupérer_le_coup(self, plateau):
-        couple = []
-
-        for i in range(4):
-            for y in range(4):
-                if plateau[i, y] is None:
-                    if len(self.piles) != 0:
+        if len(self.piles) != 0:
+            for i in range(4):
+                for y in range(4):
+                    if plateau[i, y] is None:
                         for b, _ in enumerate(self.piles):
-                            couple.append(([i, y], b))
-                else:
-                    if len(self.piles) != 0:
+                            return (b, [i, y])
+                    else:
                         for o, b in enumerate(self.piles):
                             if plateau[i, y][-1].grosseur < b.grosseur:
-                                couple.append(([i, y], o))
+                                return (o, [i, y])
+        else:
+            couple = []
+            for i in range(4):
+                for y in range(4):
+                    if plateau[i, y] is not None:
+                        if plateau[i, y][-1].no_joueur == self.no_joueur:
+                            couple.append([i, y])
+                            couple.append(plateau[i, y][-1].grosseur)
+            for a in range(4):
+                for b in range(4):
+                    if plateau[a, b][-1].grosseur < couple[1]:
+                        return(couple[0], [a, b])
             
 
 
