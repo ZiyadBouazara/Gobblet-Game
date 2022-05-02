@@ -114,7 +114,8 @@ class Joueur:
         if self.piles[no_pile] is None:
             raise GobbletError(
                 "Le joueur ne possède pas de gobelet pour la pile demandée")
-        return self.piles[no_pile] and self.piles.remove(self.piles[no_pile])
+        return self.piles[no_pile] 
+    #and self.piles.remove(self.piles[no_pile])
 
     def placer_gobblet(self, no_pile, gobelets):
         """Placer un gobelet dans la pile.
@@ -239,7 +240,7 @@ class Automate(Joueur):
         if len(self.piles) != 0:
             for i in range(4):
                 for y in range(4):
-                    if plateau[i, y] is None:
+                    if plateau[i, y] == []:
                         for b, _ in enumerate(self.piles):
                             return (b, [i, y])
                     else:
@@ -250,7 +251,7 @@ class Automate(Joueur):
             couple = []
             for i in range(4):
                 for y in range(4):
-                    if plateau[i, y] is not None:
+                    if plateau[i, y] != []:
                         if plateau[i, y][-1].no_joueur == self.no_joueur:
                             couple.append([i, y])
                             couple.append(plateau[i, y][-1].grosseur)

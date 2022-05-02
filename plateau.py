@@ -51,12 +51,12 @@ class Plateau:
                 raise GobbletError(
                     'Le plateau ne possède pas le bon nombre de colonne dans les lignes')
             for v, n in enumerate(i):
-                if len(n) >= 2:
+                if n != []:
                     for j in n:
-                        if j != [] and len(j) != 2:
+                        if j != [] or len(j) != 2:
                             raise GobbletError(
                                 'Les Gobblets doivent être des listes de paires ou une liste vide')
-                        liste[v].append(Gobblet(j[1], j[0]))
+                        liste[v].append(Gobblet(j.grosseur, j.no_joueur))
             réponse.append(liste)
         return réponse
     # OK TESTÉ
@@ -74,7 +74,7 @@ class Plateau:
         #i[n] = '   '
         for w, i in enumerate(self.plateau):
             gobblet = []
-            for b, y in enumerate(i):
+            for y in i:
                 if y == []:
                     gobblet.append('   ')
                 else:
@@ -153,10 +153,12 @@ class Plateau:
         if no_colonne not in (0, 1, 2, 3):
             raise GobbletError(
                 'Le numéro de la colonne doit être 0, 1, 2 ou 3')
-        if self.plateau[no_ligne][no_colonne] is not None \
-                and self.plateau[no_ligne][no_colonne].grosseur >= gobblet.grosseur:
+        if self.plateau[no_ligne][no_colonne] != [] \
+                and self.plateau[no_ligne][no_colonne][-1].grosseur >= gobblet.grosseur:
             raise GobbletError(
-                'Le Gobblet ne peut pas être placé sur la case demandée')  # double check
+                'Le Gobblet ne peut pas être placé sur la case demandée')  
+        self[no_ligne, no_colonne].append(gobblet)
+    # double check
     # OK
 
     def état_plateau(self):
@@ -180,10 +182,3 @@ class Plateau:
     def __getitem__(self, indice):
         return self.plateau[indice[0]][indice[1]]
 
-plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
-plateau = Plateau(plateau)
-print(plateau)
-plateau.état_plateau()
-print(plateau.état_plateau())
-print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
-print(plateau[1, 1])
