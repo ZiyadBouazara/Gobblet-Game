@@ -70,10 +70,10 @@ class Plateau:
             str: Représentation du plateau avec ses Gobblet
         """
         plateau_formaté = ""
-        #for i in self.plateau:
-            #for n in range(4):
-                #if i[n] is None:
-                    #i[n] = '   '
+        # for i in self.plateau:
+        # for n in range(4):
+        # if i[n] is None:
+        #i[n] = '   '
         for w, i in enumerate(self.plateau):
             gobblet = []
             for b, y in enumerate(i):
@@ -81,7 +81,7 @@ class Plateau:
                     gobblet.append('   ')
                 else:
                     gobblet.append(y[-1].__str__())
-            plateau_formaté += f"{3-w}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n" 
+            plateau_formaté += f"{3-w}{gobblet[0]}|{gobblet[1]}|{gobblet[2]}|{gobblet[3]}\n"
             if 3-w != 0:
                 plateau_formaté += " ───┼───┼───┼───\n"
             else:
@@ -129,7 +129,7 @@ class Plateau:
         if self.plateau[no_ligne][no_colonne] == []:
             raise GobbletError(
                 'Le plateau ne possède pas de Gobblet pour la case demandée')
-        
+
         return self.plateau[no_ligne][no_colonne]
 
     def placer_gobblet(self, no_colonne, no_ligne, gobblet):
@@ -178,14 +178,14 @@ class Plateau:
                         liste[v].append(g.état_gobblet())
             réponse.append(liste)
         return réponse
-    
+
     def __getitem__(self, indice):
         return self.plateau[indice[0]][indice[1]]
 
-plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
-plateau = Plateau(plateau)
-print(plateau)
-plateau.état_plateau()
-print(plateau.état_plateau())
-print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
-print(plateau[1, 1])
+# plateau = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 3]], [], [], []]]
+# plateau = Plateau(plateau)
+# print(plateau)
+# plateau.état_plateau()
+# print(plateau.état_plateau())
+# print(plateau.valider_plateau([[[], [], [], []], [[], [], [], []], [[], [], [], []], [[[1, 0], [2, 2], [1, 0]], [], [], []]]))
+# print(plateau[1, 1])

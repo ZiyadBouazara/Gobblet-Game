@@ -4,7 +4,7 @@ from api import lister_parties
 from gobblet import formater_les_parties, interpréteur_de_commande
 from jeu import Jeu
 
-SECRET = ""
+SECRET = "ed0f6548-6830-4e2a-9ffb-4c6d94e5b28b"
 
 
 def demander_partie_a_continuer(parties):
@@ -29,8 +29,8 @@ def lister_les_parties(idul, secret):
     identifiants = []
     parties = []
     if not chemin_de_sauvegarde.exists():
-      # le dossier n'existe pas
-      return parties
+        # le dossier n'existe pas
+        return parties
 
     for file in chemin_de_sauvegarde.iterdir():
         identifiants.append(file.stem)
@@ -56,8 +56,9 @@ if __name__ == "__main__":
         parties = lister_les_parties(args.IDUL, SECRET)
         id_partie = demander_partie_a_continuer(parties)
 
-    jeu = Jeu(args.IDUL, SECRET, id_partie=id_partie, automatique=args.automatique)
+    jeu = Jeu(args.IDUL, SECRET, id_partie=id_partie,
+              automatique=args.automatique)
     jeu.jouer()
 
 
-#print(interpréteur_de_commande())
+# print(interpréteur_de_commande())
