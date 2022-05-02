@@ -261,3 +261,8 @@ class Automate(Joueur):
                 for b in range(4):
                     if plateau[a, b][-1].grosseur < couple[1]:
                         return(couple[0], [a, b])
+            
+    def checkW(self, plateau):
+        pass
+        
+
