@@ -60,56 +60,8 @@ class Jeu:
         result_out = (" "*(max(x, y) + 3) + "0   1   2 \n"
                       f"{(z - x) * ' '}{joueurs[0]}\n"
                       f"{(z - y) * ' '}{joueurs[1]}\n\n{plateau}"
-                      )
+                    )
         return result_out
 
     def jouer(self):
-        while True:
-            print(self.__str__(self.plateau, [self.joueur1, self.joueur2]))
-            origine, destination = self.joueur1.récupérer_le_coup(self.plateau)
-
-            if origine == 'stop' or destination == 'stop':
-                dictionnaire = {self.id_partie: self.plateau.état_plateau()}
-                with open(link + f"/{self.id_partie}.json", 'w') as json_file:
-                    json.dump(dictionnaire, json_file)
-                break
-
-            if len(str(origine)) == 1:
-                g1 = self.joueur1.retirer_gobblet(origine)
-
-            else:
-                g1 = self.plateau.retirer_gobblet(origine[0], origine[1])
-
-            self.plateau.placer_gobblet(destination[0], destination[1], g1)
-
-            print(origine, len(destination))
-
-            id_partie, plateau, joueurs = jouer_coup(
-                self.id_partie, origine, destination, args.IDUL, SECRET)
-
-            self.id_partie = id_partie
-
-            for number, (initial, final) in enumerate(zip(self.joueur2.piles, joueurs[1]['piles'])):
-
-                if not isinstance(initial, Gobblet):
-                    continue
-
-                if initial.grosseur != final[1]:
-                    g2 = self.joueur2.retirer_gobblet(number)
-
-                if initial.grosseur == 0 and len(final) == 0:
-                    g2 = self.joueur2.retirer_gobblet(number)
-                    break
-
-            for index1, (x, y) in enumerate(zip(self.plateau.plateau, plateau)):
-                for index2, (a, b) in enumerate(zip(x, y)):
-
-                    if len(a) != 0 and len(b) != 0:
-                        if a[-1].grosseur != b[1]:
-                            self.plateau.placer_gobblet(index2, 3-index1, g2)
-
-                    if len(a) == 0 and len(b) == 0:
-                        continue
-
-                    if len(a) == 0 and len(b) != 0:
-                        self.plateau.placer_gobblet(index2, 3-index1, g2)
+        pass
