@@ -99,6 +99,7 @@ def récupérer_partie(id_partie, idul, secret):
 
     return (dicti['id'], dicti['plateau'], dicti['joueurs'])
 
+
 def jouer_coup(id_partie, origine, destination, idul, secret):
     """Jouer un coup
 

@@ -7,6 +7,7 @@ Functions:
 from gobblet import Gobblet, GobbletError
 from plateau import Plateau
 
+
 class Joueur:
     """
     Joueur de Gobblet.
@@ -114,8 +115,8 @@ class Joueur:
         if self.piles[no_pile] is None:
             raise GobbletError(
                 "Le joueur ne possède pas de gobelet pour la pile demandée")
-        return self.piles[no_pile] 
-    #and self.piles.remove(self.piles[no_pile])
+        return self.piles[no_pile]
+    # and self.piles.remove(self.piles[no_pile])
 
     def placer_gobblet(self, no_pile, gobelets):
         """Placer un gobelet dans la pile.
@@ -235,6 +236,7 @@ class Joueur:
                 liste.append(i.état_gobblet())
         return {"nom": self.nom, "piles": liste}
 
+
 class Automate(Joueur):
     def récupérer_le_coup(self, plateau):
         if len(self.piles) != 0:
@@ -259,6 +261,3 @@ class Automate(Joueur):
                 for b in range(4):
                     if plateau[a, b][-1].grosseur < couple[1]:
                         return(couple[0], [a, b])
-            
-
-

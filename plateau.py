@@ -156,7 +156,7 @@ class Plateau:
         if self.plateau[no_ligne][no_colonne] != [] \
                 and self.plateau[no_ligne][no_colonne][-1].grosseur >= gobblet.grosseur:
             raise GobbletError(
-                'Le Gobblet ne peut pas être placé sur la case demandée')  
+                'Le Gobblet ne peut pas être placé sur la case demandée')
         self[no_ligne, no_colonne].append(gobblet)
     # double check
     # OK
@@ -181,4 +181,3 @@ class Plateau:
 
     def __getitem__(self, indice):
         return self.plateau[indice[0]][indice[1]]
-
