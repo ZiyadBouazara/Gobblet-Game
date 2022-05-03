@@ -60,7 +60,7 @@ class Jeu:
         result_out = (" "*(max(x, y) + 3) + "0   1   2 \n"
                       f"{(z - x) * ' '}{joueurs[0]}\n"
                       f"{(z - y) * ' '}{joueurs[1]}\n\n{plateau}"
-                    )
+                      )
         return result_out
 
     def jouer(self):
