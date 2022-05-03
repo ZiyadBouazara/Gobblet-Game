@@ -1,7 +1,13 @@
 from pathlib import Path
 
-from api import lister_parties
-from gobblet import formater_les_parties, interpréteur_de_commande
+from api import débuter_partie, lister_parties, jouer_coup, récupérer_partie
+from gobblet import (
+    formater_jeu,
+    formater_les_parties,
+    interpréteur_de_commande,
+)
+from joueur import Joueur
+from plateau import Plateau
 from jeu import Jeu
 
 SECRET = "ed0f6548-6830-4e2a-9ffb-4c6d94e5b28b"
@@ -60,7 +66,7 @@ if __name__ == "__main__":
               automatique=args.automatique)
     jeu.jouer()
 
-#PARTIE DE LINA
+
 if __name__ == "__main__":
     args = interpréteur_de_commande()
     if args.lister:
@@ -68,9 +74,7 @@ if __name__ == "__main__":
         print(formater_les_parties(parties))
         #Étapes à suivre pour lister et poursuivre:
         #1 utiliser la fonction input afin de demander à l'utilisateur le numéro de la partie qu'il choisit de continuer dans la liste de parties qu'on lui a print
- 
         #2 si la valeur, le numéro de la partie dans la liste de parties n'est pas valide, reposer la question jusqu'à ce qu'elle le soit
-
         nombre_de_parties = len(parties)
         while True:
             try:
@@ -95,7 +99,7 @@ if __name__ == "__main__":
         # Si dans le command line on a spécifié vouloir continuer en automatique voici la boucle de jeu spécial:
         if args.automatique:
             #Implémenter la boucle de jeu en automatique
-            a = "a" #j'ai mis 'a' seulement pour pas que vscode mettent un problème ici en attendant qu'on implémente la boucle
+            pass #pass car nous n'avons pas réussi à établir la boucle de jeu en automatique 
         
         # Sinon on continu par défaut, soit en manuel
         else: 
@@ -116,7 +120,7 @@ if __name__ == "__main__":
 
     elif args.automatique is True and args.lister is False:
         # Implémentez la boucle de jeu en automatique
-        a = 'a' #j'ai mis 'a' seulement pour pas que vscode mettent un problème ici en attendant qu'on implémente la boucle
+        pass #pass car nous n'avons pas réussi à établir la boucle de jeu en automatique
 
     else:
         id_partie, plateau, joueurs = débuter_partie(args.IDUL, SECRET)
@@ -131,7 +135,4 @@ if __name__ == "__main__":
                 id_partie, origine, destination, args.IDUL, SECRET)
 
 
-#print(interpréteur_de_commande())
 
-
-# print(interpréteur_de_commande())
